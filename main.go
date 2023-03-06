@@ -24,13 +24,13 @@ func main() {
 
 	// Set up the routes for each module
 	r.GET("/api/gallery/gallery", gallery.Gallery)
-	r.GET("/api/gallery/gallery-images", gallery.GalleryImages)
+	r.GET("/api/gallery/gallery-images", gallery.Images)
 	r.POST("/api/gallery/new/gallery", gallery.NewGallery)
 	r.POST("/api/gallery/new/image", gallery.NewGalleryImage)
-	r.PUT("/api/gallery/gallery/{id}", gallery.UpdateGallery)
-	r.PUT("/api/gallery/image/{id}", gallery.UpdateGalleryImage)
-	r.DELETE("/api/gallery/gallery/{id}", gallery.DeleteGallery)
-	r.DELETE("/api/gallery/image/{id}", gallery.DeleteGalleryImage)
+	r.PUT("/api/gallery/gallery/:id", gallery.UpdateGallery)
+	r.PUT("/api/gallery/image/:id", gallery.UpdateGalleryImage)
+	r.DELETE("/api/gallery/gallery/:id", gallery.DeleteGallery)
+	r.DELETE("/api/gallery/image/:id", gallery.DeleteGalleryImage)
 
 	r.GET("/api/messenger/ping", messenger.Ping)
 	r.POST("/api/messenger/send/mail", messenger.SendMail)

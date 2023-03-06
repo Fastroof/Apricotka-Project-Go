@@ -1,8 +1,8 @@
 package entities
 
 type Gallery struct {
-	ID        uint64 `gorm:"primaryKey;column:group_id"`
-	GroupName string `gorm:"column:group_name"`
+	ID    uint64 `gorm:"primaryKey;autoIncrement;not null;unique;column:id" json:"id"`
+	Title string `gorm:"column:title;not null" json:"title"`
 }
 
 func (Gallery) TableName() string {

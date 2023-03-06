@@ -1,9 +1,10 @@
 package entities
 
 type GalleryImage struct {
-	ID      uint64 `gorm:"primaryKey;column:image_id"`
-	GroupId uint64 `gorm:"column:group_id"`
-	File    string `gorm:"column:image_file"`
+	ID        uint64  `gorm:"primaryKey;column:id" json:"id"`
+	Gallery   Gallery `gorm:"foreignKey:GalleryId" json:"-"`
+	GalleryId uint64  `gorm:"column:gallery_id" json:"gallery_id"`
+	File      string  `gorm:"column:file" json:"file"`
 }
 
 func (GalleryImage) TableName() string {
