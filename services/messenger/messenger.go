@@ -26,7 +26,7 @@ func Ping(c *gin.Context) {
 func SendMail(c *gin.Context) {
 	var emailDetails EmailDetails
 	if err := c.ShouldBind(&emailDetails); err != nil {
-		c.String(http.StatusBadRequest, "Bad request: %v", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	log.Println("Received Mail information : ", emailDetails)
@@ -50,14 +50,14 @@ func SendMail(c *gin.Context) {
 		// open the uploaded file
 		file, err := attachment.Open()
 		if err != nil {
-			c.String(http.StatusBadRequest, "Bad request: %v", err)
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 		// close the uploaded file after finish
 		defer func(file multipart.File) {
 			err := file.Close()
 			if err != nil {
-				c.String(http.StatusBadRequest, "Bad request: %v", err)
+				c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 				return
 			}
 		}(file)

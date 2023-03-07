@@ -21,7 +21,7 @@ func Gallery(c *gin.Context) {
 	// Get all galleries
 	result := models.DB.Find(&galleries)
 	if result.Error != nil {
-		c.IndentedJSON(http.StatusBadRequest, result.Error)
+		c.IndentedJSON(http.StatusBadRequest, result.Error.Error())
 		return
 	}
 	c.IndentedJSON(http.StatusOK, galleries)
@@ -32,7 +32,7 @@ func Images(c *gin.Context) {
 	// Get all images
 	result := models.DB.Find(&images)
 	if result.Error != nil {
-		c.IndentedJSON(http.StatusBadRequest, result.Error)
+		c.IndentedJSON(http.StatusBadRequest, result.Error.Error())
 		return
 	}
 	c.IndentedJSON(http.StatusOK, images)
@@ -133,7 +133,7 @@ func UpdateGalleryImage(c *gin.Context) {
 	// Get the ID from the URL parameter
 	id := c.Param("id")
 
-	// Bind the request body
+	// Bind the response body
 	var formData galleryImageFormData
 	if err := c.ShouldBind(&formData); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

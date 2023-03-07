@@ -3,6 +3,7 @@ package main
 import (
 	"apricotka.com.ua/packages/models"
 	"apricotka.com.ua/packages/services/gallery"
+	"apricotka.com.ua/packages/services/image-storage"
 	"apricotka.com.ua/packages/services/messenger"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -35,8 +36,11 @@ func main() {
 	r.GET("/api/messenger/ping", messenger.Ping)
 	r.POST("/api/messenger/send/mail", messenger.SendMail)
 
-	//r.GET("/orders", orders.Handler)
-	//
+	r.GET("/api/image-storage/products-images", image_storage.GetProductImages)
+	r.POST("/api/image-storage/upload", image_storage.UploadImage)
+	r.PUT("/api/image-storage/:id", image_storage.UpdateImage)
+	r.DELETE("/api/image-storage/:id", image_storage.DeleteImage)
+
 	//r.GET("/security/login", security.HandleLogin)
 	//r.POST("/security/login", security.HandleLogin)
 	//r.GET("/security/logout", security.HandleLogout)
